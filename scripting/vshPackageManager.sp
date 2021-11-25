@@ -7,6 +7,8 @@
 #include <SteamWorks>
 #define REQUIRE_EXTENSIONS
 
+#include <tf2>
+
 #pragma semicolon            1
 #pragma newdecls             required
 
@@ -26,7 +28,8 @@ public Plugin pluginInfo = {
 };
 
 public void OnPluginStart() {
-	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE() && !STEAMWORKS_AVAILABLE())
+
+	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE() && !STEAMWORKS_AVAILABLE() && TFClass_Pyro)
 	{
 		SetFailState(EXTENSION_ERROR);
 	}
