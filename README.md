@@ -8,18 +8,18 @@ inside this repository are three build scripts: `build.cmd`, `build.ps1` and `bu
 `[path/to/sources]` are the paths to the source pawn scripts, they should be either a full path or a path relative to the project diretory.
 `[-switches]` are the extra switches passed to the compiler, `-o`, `-O` and `-v` are already handled inside the scripts.
 
-To use the scripts first you should change directory to the project's root directory, from there you can use one of the following commands to build, be sure to replace `<path/to/spcomp>` with an actual path!
-### Command prompt
+To use the scripts first you should change directory to the project's root directory, from there you can use one of the following commands to build, be sure to replace `<path/to/spcomp>` and `<path/to/sm/includes>` with an actual path!
+### Batch (command prompt)
 ```
-./build.cmd <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include'
+./build.cmd <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='`<path/to/sm/includes>`'
 ```
 ### Powershell
 ```
-./build.ps1 <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include'
+./build.ps1 <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='`<path/to/sm/includes>`'
 ```
-### Batch
+### Bash
 ```
-./build.sh <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include'
+./build.sh <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='`<path/to/sm/includes>`'
 ```
 
 Once built, the plugin should be in `<projectRoot>/build`.
