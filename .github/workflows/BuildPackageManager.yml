@@ -1,15 +1,16 @@
 name: Build Package Manager
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   workflow_dispatch:
   # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    branches: 
+    branches:
       - master
     paths:
       - 'scripting/*'
       - 'build.*'
+      - 'getDependencies.*'
       - '!build/*'
       - '!packages/*'
   pull_request:
@@ -18,9 +19,10 @@ on:
     paths:
       - 'scripting/*'
       - 'build.*'
+      - 'getDependencies.*'
       - '!build/*'
       - '!packages/*'
-      
+
 jobs:
   build:
     name: Compile SourcePawn ${{matrix.sm_version}}
@@ -32,13 +34,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       # Sets up the SourcePawn compiler
       - name: Setup SourcePawn Compiler ${{ matrix.sm_version }}
         run: |
           wget --input-file=http://sourcemod.net/smdrop/${{ matrix.sm_version }}/sourcemod-latest-linux
-          tar -xzf $(cat sourcemod-latest-linux)          
-      
+          tar -xzf $(cat sourcemod-latest-linux)
+
+      # Download dependencies
+      - name: Download dependencies
+        run: bash $GITHUB_WORKSPACE/getDependencies.sh
+
       # bash $GITHUB_WORKSPACE/build.sh spcomp 'scripting/vshPackageManager.sp' -i='scripting/include'
       - name: Compile Plugins
         run: |
@@ -46,7 +52,7 @@ jobs:
 
       - name: Pack Plugins
         run: zip vshPackageManager.zip $GITHUB_WORKSPACE/build/vshPackageManager.smx
-          
+
       - name: 'Upload Compilation Artifact'
         uses: actions/upload-artifact@v2
         with:

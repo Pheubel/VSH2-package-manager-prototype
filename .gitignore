@@ -1,2 +1,9 @@
 
 build/*
+
+# dependencies
+scripting/include/cURL.inc
+scripting/include/cURL_header.inc
+scripting/include/socket.inc
+scripting/include/steamtools.inc
+scripting/include/SteamWorks.inc
