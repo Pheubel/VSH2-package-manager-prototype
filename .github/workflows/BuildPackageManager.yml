@@ -8,11 +8,17 @@ on:
     branches: 
       - master
     paths:
+      - 'scripting/*'
+      - 'build.*'
+      - '!build/*'
       - '!packages/*'
   pull_request:
     branches:
       - master
     paths:
+      - 'scripting/*'
+      - 'build.*'
+      - '!build/*'
       - '!packages/*'
       
 jobs:
@@ -29,9 +35,20 @@ jobs:
       
       # Sets up the SourcePawn compiler
       - name: Setup SourcePawn Compiler ${{ matrix.sm_version }}
-        uses: rumblefrog/setup-sp@master
-        with:
-          version: ${{ matrix.sm_version }}
-          
+        run: |
+          wget --input-file=http://sourcemod.net/smdrop/${{ matrix.sm_version }}/sourcemod-latest-linux
+          tar -xzf $(cat sourcemod-latest-linux)          
+      
+      # bash $GITHUB_WORKSPACE/build.sh spcomp 'scripting/vshPackageManager.sp' -i='scripting/include'
       - name: Compile Plugins
-        run: $GITHUB_WORKSPACE/build.sh spcomp 'scripting/vshPackageManager.sp' -i='scripting/include'
+        run: |
+          bash $GITHUB_WORKSPACE/build.sh addons/sourcemod/scripting/spcomp 'scripting/vshPackageManager.sp' -i='scripting/include' -i='addons/sourcemod/scripting/include'
+
+      - name: Pack Plugins
+        run: zip vshPackageManager.zip $GITHUB_WORKSPACE/build/vshPackageManager.smx
+          
+      - name: 'Upload Compilation Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: VSH2 Package Manager (SM ${{ matrix.sm_version }})
+          path: vshPackageManager.zip
