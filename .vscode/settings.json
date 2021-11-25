@@ -1,0 +1,4 @@
+{
+    "sourcepawn.outputDirectoryPath": "./build/",
+    "sourcepawn.MainPath": "scripting/vshPackageManager.sp"
+}
