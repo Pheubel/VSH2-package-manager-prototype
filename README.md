@@ -11,15 +11,15 @@ inside this repository are three build scripts: `build.cmd`, `build.ps1` and `bu
 To use the scripts first you should change directory to the project's root directory, from there you can use one of the following commands to build, be sure to replace `<path/to/spcomp>` and `<path/to/sm/includes>` with an actual path!
 ### Batch (command prompt)
 ```
-./build.cmd <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='`<path/to/sm/includes>`'
+./build.cmd <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='<path/to/sm/includes>'
 ```
 ### Powershell
 ```
-./build.ps1 <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='`<path/to/sm/includes>`'
+./build.ps1 <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='<path/to/sm/includes>'
 ```
 ### Bash
 ```
-./build.sh <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='`<path/to/sm/includes>`'
+./build.sh <path/to/spcomp> 'scripting/vshPackageManager.sp' -i='scripting/include' -i='<path/to/sm/includes>'
 ```
 
 Once built, the plugin should be in `<projectRoot>/build`.
